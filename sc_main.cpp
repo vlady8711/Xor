@@ -3,46 +3,36 @@
 #include "monitor.h"
 
 int sc_main(int argc, char* argv[]) {
-	/* 
-	sc_core::sc_report_handler::set_actions( "/IEEE_Std_1666/deprecated",
-                                           sc_core::SC_DO_NOTHING );
-	*/
-	sc_signal<bool> ASig, BSig, FSig;
-	sc_clock TestClk("TestClock", 10, SC_NS, 0.5);
-	sc_trace_file *fp;
+	sc_signal<bool> input_1, input_2, output;
+	sc_clock test_clock("TestClock", 10, SC_NS, 0.5);
+	sc_trace_file *trace_file;
 	
-	stimulus Stim1("Stimulus");
-	Stim1.A(ASig);
-	Stim1.B(BSig);
-	Stim1.Clk(TestClk);
+	stimulus stimulus_1("Stimulus");
+	stimulus_1.input_1(input_1);
+	stimulus_1.input_2(input_2);
+	stimulus_1.clock(test_clock);
 	
-	monitor Monitor1("Monitor");
-	Monitor1.A(ASig);
-	Monitor1.B(BSig);
-	Monitor1.F(FSig);
-	Monitor1.Clk(TestClk);
+	monitor monitor_1("Monitor");
+	monitor_1.input_1(input_1);
+	monitor_1.input_2(input_2);
+	monitor_1.output(output);
+	monitor_1.clock(test_clock);
 
-	xor_ DUV("xor");
-	DUV.A(ASig);
-	DUV.B(BSig);
-	DUV.F(FSig);
+	xor_ xor_1("Xor");
+	xor_1.input_1(input_1);
+	xor_1.input_2(input_2);
+	xor_1.output(output);
 
+	trace_file = sc_create_vcd_trace_file("wave");
 
-
-
-	fp = sc_create_vcd_trace_file("wave");
-
-
-	sc_trace(fp, TestClk, "Clk");
-	sc_trace(fp, ASig, "A");
-	sc_trace(fp, BSig, "B");
-	sc_trace(fp, FSig, "F");
+	sc_trace(trace_file, test_clock, "Clock");
+	sc_trace(trace_file, input_1, "Input_1");
+	sc_trace(trace_file, input_2, "Input_2");
+	sc_trace(trace_file, output, "Output");
 
 	sc_start();
 
-	sc_close_vcd_trace_file(fp);
-
-
+	sc_close_vcd_trace_file(trace_file);
 
 	return 0;
 }

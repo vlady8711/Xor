@@ -1,15 +1,15 @@
 #include "systemc.h"
 
 SC_MODULE(nand) {
-	sc_in<bool> A, B;
-	sc_out<bool> F;
+	sc_in<bool> input_1, input_2;
+	sc_out<bool> output;
 
-	void do_it() {
-		F.write( !(A.read() && B.read()) );
+	void execute_nand() {
+		output.write( !(input_1.read() && input_2.read()) );
 	}
-	
+
 	SC_CTOR(nand) {
-		SC_METHOD(do_it);
-		sensitive << A << B;
+		SC_METHOD(execute_nand);
+		sensitive << input_1 << input_2;
 	}
 };

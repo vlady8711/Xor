@@ -1,25 +1,25 @@
 #include "systemc.h"
 
 SC_MODULE(stimulus) {
-	sc_out<bool> A, B;
-	sc_in<bool> Clk;
+	sc_out<bool> input_1, input_2;
+	sc_in<bool> clock;
 	
 	void StimGen() {
 		wait();
-		A.write(false);
-		B.write(false);
+		input_1.write(false);
+		input_2.write(false);
 		wait();
 		// wait for the next clock tick
-		A.write(false);
-		B.write(true);
+		input_1.write(false);
+		input_2.write(true);
 		wait();
 
-		A.write(true);
-		B.write(false);
+		input_1.write(true);
+		input_2.write(false);
 		wait();
 
-		A.write(true);
-		B.write(true);
+		input_1.write(true);
+		input_2.write(true);
 		wait();
 		// wait for the next clock tick
 		
@@ -29,6 +29,6 @@ SC_MODULE(stimulus) {
 	
 	SC_CTOR(stimulus) {
 		SC_THREAD(StimGen);
-		sensitive << Clk.pos();
+		sensitive << clock.pos();
 	}
 };

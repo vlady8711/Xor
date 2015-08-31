@@ -1,30 +1,26 @@
 #include "nand.h"
 
 SC_MODULE(xor_) {
-	sc_in<bool> A, B;
-	sc_out<bool> F;
-	nand n1, n2, n3, n4;
-	sc_signal<bool> S1, S2, S3;
+	sc_in<bool> input_1, input_2;
+	sc_out<bool> output;
+	nand nand_1, nand_2, nand_3, nand_4;
+	sc_signal<bool> signal_1, signal_2, signal_3;
 	
-	SC_CTOR(xor_) : n1("N1"), n2("N2"), n3("N3"), n4("N4") {
-		n1.A(A);
-		n1.B(B);
-		n1.F(S1);
+	SC_CTOR(xor_) : nand_1("nand_1"), nand_2("nand_2"), nand_3("nand_3"), nand_4("nand_4") {
+		nand_1.input_1(input_1);
+		nand_1.input_2(input_2);
+		nand_1.output(signal_1);
 		
-		n2.A(A);
-		n2.B(S1);
-		n2.F(S2);
+		nand_2.input_1(input_1);
+		nand_2.input_2(signal_1);
+		nand_2.output(signal_2);
 
-		//n2 << A << S1 << S2;
+		nand_3.input_1(signal_1);
+		nand_3.input_2(input_2);
+		nand_3.output(signal_3);
 
-		n3.A(S1);
-		n3.B(B);
-		n3.F(S3);
-
-		n4.A(S2);
-		n4.B(S3);
-		n4.F(F);
-		
-		//n4 << S2 << S3 << F;
+		nand_4.input_1(signal_2);
+		nand_4.input_2(signal_3);
+		nand_4.output(output);
 	}
 };

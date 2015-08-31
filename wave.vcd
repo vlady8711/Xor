@@ -1,5 +1,5 @@
 $date
-     Aug 30, 2015       19:02:01
+     Aug 30, 2015       19:28:16
 $end
 
 $version
@@ -11,10 +11,10 @@ $timescale
 $end
 
 $scope module SystemC $end
-$var wire    1  aaaaa  Clk       $end
-$var wire    1  aaaab  A       $end
-$var wire    1  aaaac  B       $end
-$var wire    1  aaaad  F       $end
+$var wire    1  aaaaa  Clock       $end
+$var wire    1  aaaab  Input_1       $end
+$var wire    1  aaaac  Input_2       $end
+$var wire    1  aaaad  Output       $end
 $upscope $end
 $enddefinitions  $end
 
