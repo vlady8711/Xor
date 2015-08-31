@@ -1,4 +1,4 @@
-TARGET = run_me
+TARGET = output
 SYSTEMC = $(SYSTEMC_HOME)
 INCDIR = -I. -I$(SYSTEMC)/include
 LIBDIR = -L. -L$(SYSTEMC)/lib-linux64
@@ -15,6 +15,8 @@ all: $(EXE)
 
 $(EXE): $(OBJS)  
 	$(CC) $(CFLAGS) $(INCDIR) $(LIBDIR) -o $@ $(OBJS) $(LIBS) 2>&1
+	./$(TARGET)
+	gtkwave *.vcd
 
 sc_main.o:	sc_main.cpp nand.h xor.h monitor.h stimulus.h
 	$(CC) $(CFLAGS) $(INCDIR) -c $<

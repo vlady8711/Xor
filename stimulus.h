@@ -6,10 +6,11 @@ SC_MODULE(stimulus) {
 	
 	void StimGen() {
 		wait();
+
 		input_1.write(false);
 		input_2.write(false);
 		wait();
-		// wait for the next clock tick
+		
 		input_1.write(false);
 		input_2.write(true);
 		wait();
@@ -21,10 +22,8 @@ SC_MODULE(stimulus) {
 		input_1.write(true);
 		input_2.write(true);
 		wait();
-		// wait for the next clock tick
 		
 		sc_stop();
-		// notify kernel to stop simulation
 	}
 	
 	SC_CTOR(stimulus) {
