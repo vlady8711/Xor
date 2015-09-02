@@ -25,12 +25,12 @@ int sc_main(int argc, char* argv[]) {
 
 	trace_file = sc_create_vcd_trace_file("wave");
 
-/*
+
 	sc_trace(trace_file, test_clock, "Clock");
 	sc_trace(trace_file, input_1, "Input_1");
 	sc_trace(trace_file, input_2, "Input_2");
 	sc_trace(trace_file, output, "Output");
-*/
+
 	sc_start();
 
 	sc_close_vcd_trace_file(trace_file);
