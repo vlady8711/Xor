@@ -7,8 +7,14 @@ SC_MODULE(monitor) {
 	void Monitor() {
 		while(1) {
 			wait();
-			cout << sc_time_stamp() << "\t   " << input_1.read()
-			<< "       " << input_2.read() << "       " << output.read() << endl;
+
+			double time_stamp = sc_time_stamp().to_default_time_units();
+
+			if (time_stamp != 0)
+			{
+				cout << sc_time_stamp() << "\t   " << input_1.read()
+					<< "       " << input_2.read() << "       " << output.read() << endl;
+			}
 		}
 	}
 	
